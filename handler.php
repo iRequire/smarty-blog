@@ -15,6 +15,7 @@ class BlogHandler {
         $smarty->config_dir = 'C:/xampp/htdocs/arbeit/smarty-blog/config';
         $smarty->cache_dir = 'C:/xampp/smarty/cache';
         $smarty->compile_dir = 'C:/xampp/smarty/templates_c';
+        $smarty->default_modifiers = array('escape:"html"');
         $this->smarty = $smarty;
 
         $pdo = new PDO('mysql:host=localhost;dbname=arbeit;charset=utf8', 'root', '');
@@ -59,6 +60,45 @@ class BlogHandler {
         return $comments;
     }
 
+    public function searchBlogs($search_query){
+        $blog_entries = array();
+        $count = 0;
+
+
+        $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE title LIKE ?");
+        $statement->execute(array('%'.$search_query.'%'));
+        while($row = $statement->fetch()) {
+            $blog_entries[] = $row;
+        }
+        $count += $statement->rowCount();
+
+        $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE author LIKE ?");
+        $statement->execute(array('%'.$search_query.'%'));
+        while($row = $statement->fetch()) {
+            $blog_entries[] = $row;
+        }
+        $count += $statement->rowCount();
+
+        $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE text LIKE ?");
+        $statement->execute(array('%'.$search_query.'%'));
+        while($row = $statement->fetch()) {
+            $blog_entries[] = $row;
+        }
+        $count += $statement->rowCount();
+
+        $blog_entries_unique = self::unique_multidim_array($blog_entries, 'title');
+
+        return (($count > 0) ? $blog_entries_unique : false);
+    }
+
+    public function commentsAllowed($blog_id){
+        $stmt = $this->pdo->prepare("SELECT * FROM blog_entries WHERE id = ? LIMIT 1");
+        $stmt->execute(array($blog_id));
+        $row = $stmt->fetch();
+
+        return $row['enable_comments'];
+    }
+
     public function addComment($blog_id, $user, $text){
         $statement = $this->pdo->prepare("INSERT INTO blog_comments (blogid, name, text, date) VALUES (?, ?, ?, ?)");
         $statement->execute(array($blog_id, $user, $text, time()));
@@ -84,5 +124,21 @@ class BlogHandler {
         }
 
         return true;
+    }
+
+
+    function unique_multidim_array($array, $key) {
+        $temp_array = array();
+        $i = 0;
+        $key_array = array();
+
+        foreach($array as $val) {
+            if (!in_array($val[$key], $key_array)) {
+                $key_array[$i] = $val[$key];
+                $temp_array[$i] = $val;
+            }
+            $i++;
+        }
+        return $temp_array;
     }
 }

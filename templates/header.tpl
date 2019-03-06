@@ -8,6 +8,8 @@
 
         <title>{$title|default:"Kein Titel"}</title>
 
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
+
         <link href="https://cdn.irequire.dev/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.irequire.dev/fontawesome/5.7.2/css/all.min.css" rel="stylesheet">
 

@@ -1,9 +1,9 @@
-{include file="header.tpl" title="Suche" admin=$data.admin}
+{include file="header.tpl" title="Suche: {$data.search_query}" admin=$data.admin}
 
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-8">
-            <h1 class="mt-4">Suchergebnisse</h1>
+            <h1 class="mt-4">Suchergebnisse: "{$data.search_query}"</h1>
             {foreach $data.notifications as $notification}
                 {if $notification.type == "warning"}
                     {assign var="icon" value="fas fa-exclamation"}

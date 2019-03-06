@@ -31,7 +31,7 @@ if(isset($_GET['search'])){
         $notifications[] = array('type' => 'warning', 'text' => "Es konnte kein Blogeintrag mit dem Suchbegriff '".$_GET['search']."' gefunden werden.");
     }
 
-    $bloghandler->loadPage('search.tpl', array('search_items' => $blog_entries, 'notifications' => $notifications, 'admin' => $admin));
+    $bloghandler->loadPage('search.tpl', array('search_items' => $blog_entries, 'search_query' => $_GET['search'], 'notifications' => $notifications, 'admin' => $admin));
     die();
 }
 if(isset($_GET['id'])){

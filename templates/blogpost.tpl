@@ -1,41 +1,48 @@
-{include file="header.tpl" title=$blogpost.title}
+{include file="header.tpl" title=$data.blogpost.title}
 
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-8">
-            <h1 class="mt-4">{$blogpost.title}</h1>
+            {if $data.added_comment}
+                <div class="alert alert-success" style="margin-top: 25px;"><i class="fas fa-check"></i> Der Kommentar wurde veröffentlicht.</div>
+            {/if}
+            <h1 class="mt-4">{$data.blogpost.title}</h1>
             <p class="lead">
-                Veröffentlicht am {$blogpost.date|date_format:"%d.%m.%Y %H:%M"} von <a href="#">{$blogpost.author}</a>
+                Veröffentlicht am {$data.blogpost.date|date_format:"%d.%m.%Y %H:%M"} von <a href="#">{$data.blogpost.author}</a>
             </p>
             <hr>
-            <p class="lead">{$blogpost.text}</p>
+            <p class="lead">{$data.blogpost.text}</p>
 
 
             <hr>
             <h3>Kommentare</h3>
-            {if $blogpost.enable_comments}
+            {if $data.blogpost.enable_comments}
                 <div class="card my-4">
                     <h5 class="card-header">Hinterlasse einen Kommentar:</h5>
                     <div class="card-body">
-                        <form>
+                        <form method="post" action="{$smarty.server.PHP_SELF|escape}">
+                            <input type="hidden" name="comment_blogid" value="{$data.blogpost.id}">
                             <div class="form-group">
-                                <textarea class="form-control" rows="3"></textarea>
+                                <input class="form-control" type="text" name="comment_name" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="comment_text" placeholder="Kommentar" rows="3"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Absenden</button>
                         </form>
                     </div>
                 </div>
             {else}
-                <div class="alert alert-info"><i class="fa fas fa-exclamation-triangle"></i> Kommentare wurden für diesen Blogeintrag deaktiviert.</div>
+                <div class="alert alert-info"><i class="fa fas fa-exclamation-triangle"></i> Weitere Kommentare wurden für diesen Blogeintrag deaktiviert.</div>
             {/if}
 
-            {foreach from=$comments item=comment}
+            {foreach from=$data.comments item=comment}
                 {assign var=rand value=0|mt_rand:99}
                 <div class="media mb-4">
                     <img class="d-flex mr-3 rounded-circle" src="https://randomuser.me/api/portraits/men/{$rand}.jpg" height="40px" width="40px" alt="">
                     <div class="media-body">
-                        <h5 class="mt-0">{$comment.name} ({$comment.date|date_format:"%d.%m.%Y %H:%M"})</h5>
-                        {$comment.text}
+                        <h5 class="mt-0">{$comment.name|escape} ({$comment.date|date_format:"%d.%m.%Y %H:%M"})</h5>
+                        {$comment.text|escape}
                     </div>
                 </div>
             {/foreach}

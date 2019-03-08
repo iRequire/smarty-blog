@@ -135,6 +135,50 @@ if(isset($_GET['logout'])){
     $bloghandler->loadPage('login.tpl', array('notifications' => $notifications, 'user' => $user));
     die();
 }
+if(isset($_GET['admin'])){
+    if($user['admin'] > 0) {
+        $users = $bloghandler->getUsers();
+        $bloghandler->loadPage('admin.tpl', array('notifications' => $notifications, 'user' => $user, 'users' => $users));
+    }else{
+        $blog_entries = $bloghandler->getBlogEntries();
+        $notifications[] = array('type' => 'danger', 'text' => "Du hast nicht die nötigen Berechtigungen, um die angeforderte Seite aufzurufen.");
+        $bloghandler->loadPage('blogpostlist.tpl', array('blog_entries' => $blog_entries, 'notifications' => $notifications, 'user' => $user));
+    }
+    die();
+}
+
+
+if(isset($_GET['adm_togAdmin'])){
+    if($user['admin'] > 0) {
+        $bloghandler->editUser($_GET['adm_togAdmin'], 'admin', (($bloghandler->getUserByID($_GET['adm_togAdmin'])['admin']) ? 0 : 1));
+        $notifications[] = array('type' => 'success', 'text' => "Der Nutzer wurde erfolgreich bearbeitet.");
+
+        $users = $bloghandler->getUsers();
+        $bloghandler->loadPage('admin.tpl', array('notifications' => $notifications, 'user' => $user, 'users' => $users));
+    }else{
+        $blog_entries = $bloghandler->getBlogEntries();
+        $notifications[] = array('type' => 'danger', 'text' => "Du hast nicht die nötigen Berechtigungen, um die angeforderte Seite aufzurufen.");
+        $bloghandler->loadPage('blogpostlist.tpl', array('blog_entries' => $blog_entries, 'notifications' => $notifications, 'user' => $user));
+    }
+    die();
+}
+if(isset($_GET['adm_delUser'])){
+    if($user['admin'] > 0) {
+        $bloghandler->deleteUser($_GET['adm_delUser']);
+        $notifications[] = array('type' => 'success', 'text' => "Der Nutzer wurde erfolgreich gelöscht.");
+
+        $users = $bloghandler->getUsers();
+        $bloghandler->loadPage('admin.tpl', array('notifications' => $notifications, 'user' => $user, 'users' => $users));
+    }else{
+        $blog_entries = $bloghandler->getBlogEntries();
+        $notifications[] = array('type' => 'danger', 'text' => "Du hast nicht die nötigen Berechtigungen, um die angeforderte Seite aufzurufen.");
+        $bloghandler->loadPage('blogpostlist.tpl', array('blog_entries' => $blog_entries, 'notifications' => $notifications, 'user' => $user));
+    }
+    die();
+}
+
+
+
 if(isset($_GET['id'])){
     $id = $_GET['id'];
 

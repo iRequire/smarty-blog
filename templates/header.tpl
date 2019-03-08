@@ -12,7 +12,7 @@
 
         <link href="https://cdn.irequire.dev/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.irequire.dev/fontawesome/5.7.2/css/all.min.css" rel="stylesheet">
-        
+
         <link href="https://cdn.irequire.dev/libs/quill/quill.snow.css" rel="stylesheet">
 
         {literal}
@@ -54,6 +54,11 @@
                     {else}
                         <li class="nav-item">
                             <a class="nav-link" href="?login">Anmelden</a>
+                        </li>
+                    {/if}
+                    {if $data.user.admin}
+                        <li class="nav-item">
+                            <a class="nav-link" href="?admin" style="color: red">ADMIN</a>
                         </li>
                     {/if}
                 </ul>

@@ -137,6 +137,12 @@ class BlogHandler {
         return $stmt->fetch();
     }
 
+    public function getUserByID($id){
+        $stmt = $this->pdo->prepare("SELECT * FROM blog_users WHERE id = ? LIMIT 1");
+        $stmt->execute(array($id));
+        return $stmt->fetch();
+    }
+
     public function addBlog($title, $author, $text, $enable_comments){
         $statement = $this->pdo->prepare("INSERT INTO blog_entries (title, author, text, enable_comments) VALUES (?, ?, ?, ?)");
         $statement->execute(array($title, $author, $text, $enable_comments));
@@ -154,6 +160,27 @@ class BlogHandler {
         $user['lastname'] = $ui['lastname'];
 
         return $user;
+    }
+
+    public function getUsers(){
+        $users = array();
+        $statement = $this->pdo->prepare("SELECT * FROM blog_users ORDER BY id ASC");
+        $statement->execute();
+        while($row = $statement->fetch()) {
+            $users[] = $row;
+        }
+
+        return $users;
+    }
+
+    public function editUser($id, $type, $value){
+        $statement = $this->pdo->prepare("UPDATE blog_users SET `".$type."` = ? WHERE id = ?");
+        $statement->execute(array($value, $id));
+    }
+
+    public function deleteUser($id){
+        $statement = $this->pdo->prepare("DELETE FROM blog_users WHERE id = ?");
+        $statement->execute(array($id));
     }
 
     function customErrorHandler($fehlercode, $fehlertext, $fehlerdatei, $fehlerzeile)

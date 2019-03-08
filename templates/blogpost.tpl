@@ -4,7 +4,9 @@
     <div class="row">
         <div class="col-lg-8 shadow">
             {foreach $data.notifications as $notification}
-                {if $notification.type == "warning"}
+                {if $notification.type == "danger"}
+                    {assign var="icon" value="fas fa-exclamation"}
+                {elseif $notification.type == "warning"}
                     {assign var="icon" value="fas fa-exclamation"}
                 {elseif $notification.type == "success"}
                     {assign var="icon" value="fas fa-check"}

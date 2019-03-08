@@ -104,6 +104,39 @@ class BlogHandler {
         $statement->execute(array($blog_id, $user, $text, time()));
     }
 
+    public function doesUserExist($username){
+        $stmt = $this->pdo->prepare("SELECT * FROM blog_users WHERE username = ? LIMIT 1");
+        $stmt->execute(array($username));
+        $stmt->fetch();
+
+        return (($stmt->rowCount() == 0) ? false : true);
+    }
+
+    public function addUser($username, $password, $email, $firstname, $lastname){
+        $statement = $this->pdo->prepare("INSERT INTO blog_users (username, password, email, firstname, lastname, admin) VALUES (?, ?, ?, ?, ?, ?)");
+        $password = hash_hmac('sha512', $password, $username); // Passwort mit Username hashen
+        $statement->execute(array($username, $password, $email, $firstname, $lastname, 0));
+    }
+
+    public function checkLogin($username, $password){
+        $stmt = $this->pdo->prepare("SELECT * FROM blog_users WHERE username = ? LIMIT 1");
+        $stmt->execute(array($username));
+        $row = $stmt->fetch();
+
+        $entered_pw = hash_hmac('sha512', $password, $username);
+        if($row['password'] === $entered_pw){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getUser($username){
+        $stmt = $this->pdo->prepare("SELECT * FROM blog_users WHERE username = ? LIMIT 1");
+        $stmt->execute(array($username));
+        return $stmt->fetch();
+    }
+
     function customErrorHandler($fehlercode, $fehlertext, $fehlerdatei, $fehlerzeile)
     {
         if (!(error_reporting() & $fehlercode)) {

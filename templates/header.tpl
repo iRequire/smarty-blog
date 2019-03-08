@@ -45,9 +45,13 @@
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    {if $admin}
+                    {if $data.user.loggedin > 0}
                         <li class="nav-item">
-                            <a class="nav-link" href="#" style="color: red">(ADMIN-MODE)</a>
+                            <a class="nav-link" href="?logout">Angemeldet als {$data.user.firstname} {$data.user.lastname} ({$data.user.username}, AL {$data.user.admin})</a>
+                        </li>
+                    {else}
+                        <li class="nav-item">
+                            <a class="nav-link" href="?login">Anmelden</a>
                         </li>
                     {/if}
                 </ul>

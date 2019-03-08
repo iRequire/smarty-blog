@@ -1,4 +1,4 @@
-{include file="header.tpl" title=$data.blogpost.title  admin=$data.admin}
+{include file="header.tpl" title=$data.blogpost.title  admin=$data.user.admin}
 
 <div class="container pagebg">
     <div class="row">
@@ -24,21 +24,25 @@
             <hr>
             <h3>Kommentare</h3>
             {if $data.blogpost.enable_comments}
-                <div class="card my-4">
-                    <h5 class="card-header">Hinterlasse einen Kommentar:</h5>
-                    <div class="card-body">
-                        <form method="post" action="{$smarty.server.PHP_SELF}">
-                            <input type="hidden" name="comment_blogid" value="{$data.blogpost.id}">
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="comment_name" placeholder="Name">
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="comment_text" placeholder="Kommentar" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Absenden</button>
-                        </form>
+                {if $data.user.loggedin}
+                    <div class="card my-4">
+                        <h5 class="card-header">Hinterlasse einen Kommentar:</h5>
+                        <div class="card-body">
+                            <form method="post" action="{$smarty.server.PHP_SELF}">
+                                <input type="hidden" name="comment_blogid" value="{$data.blogpost.id}">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" value="{$data.user.firstname} {$data.user.lastname}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="comment_text" placeholder="Kommentar" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Absenden</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                {else}
+                    <div class="alert alert-warning"><i class="fas fa-exclamation"></i> Du musst eingeloggt sein, um Kommentare verfassen zu können.</div>
+                {/if}
             {else}
                 <div class="alert alert-info"><i class="fas fa-info"></i> Weitere Kommentare wurden für diesen Blogeintrag deaktiviert.</div>
             {/if}

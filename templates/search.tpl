@@ -1,4 +1,4 @@
-{include file="header.tpl" title="Suche: {$data.search_query}" admin=$data.admin}
+{include file="header.tpl" title="Suche: {$data.search_query}" admin=$data.user.admin}
 
 <div class="container pagebg">
     <div class="row">

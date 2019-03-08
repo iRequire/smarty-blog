@@ -1,4 +1,4 @@
-{include file="header.tpl" title="Blogeinträge" admin=$data.admin}
+{include file="header.tpl" title="Blogeinträge" admin=$data.user.admin}
 
 <div class="container pagebg">
     <div class="row">

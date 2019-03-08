@@ -1,5 +1,6 @@
 <?php
-require('Smarty.class.php');
+require('configs/config.php');
+require(SMARTYPATH.'/Smarty.class.php');
 class BlogHandler {
 
     public $smarty;
@@ -11,14 +12,14 @@ class BlogHandler {
 
 
         $smarty = new Smarty;
-        $smarty->template_dir = 'C:/xampp/htdocs/arbeit/smarty-blog/templates';
-        $smarty->config_dir = 'C:/xampp/htdocs/arbeit/smarty-blog/config';
-        $smarty->cache_dir = 'C:/xampp/smarty/cache';
-        $smarty->compile_dir = 'C:/xampp/smarty/templates_c';
+        $smarty->template_dir = 'templates';
+        $smarty->config_dir = 'config';
+        $smarty->cache_dir = SMARTYPATH.'/cache';
+        $smarty->compile_dir = SMARTYPATH.'/templates_c';
         $smarty->default_modifiers = array('escape:"html"');
         $this->smarty = $smarty;
 
-        $pdo = new PDO('mysql:host=localhost;dbname=arbeit;charset=utf8', 'root', '');
+        $pdo = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.';charset=utf8', DBUSER, DBPASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $this->pdo = $pdo;
     }

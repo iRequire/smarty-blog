@@ -64,6 +64,11 @@ if($_POST){
         $password = $_POST['password'];
         $password2 = $_POST['password2'];
         $email = $_POST['email'];
+        if(strlen($password) < 8){
+            $notifications[] = array('type' => 'danger', 'text' => "Das Passwort muss mindestens 8 Zeichen lang sein.");
+            $bloghandler->loadPage('register.tpl', array('notifications' => $notifications, 'user' => $user));
+            die();
+        }
 
         if($password === $password2) {
             $exists = $bloghandler->doesUserExist($username);
@@ -78,7 +83,7 @@ if($_POST){
                 $bloghandler->loadPage('blogpostlist.tpl', array('blog_entries' => $blog_entries, 'notifications' => $notifications, 'user' => $user));
                 die();
             } else {
-                $notifications[] = array('type' => 'danger', 'text' => "Ein Nutzer mit dem Namen <i>" . $username . "</i> existiert bereits.");
+                $notifications[] = array('type' => 'danger', 'text' => "Ein Nutzer mit dem Namen '" . $username . "' existiert bereits.");
                 $bloghandler->loadPage('register.tpl', array('notifications' => $notifications, 'user' => $user));
                 die();
             }

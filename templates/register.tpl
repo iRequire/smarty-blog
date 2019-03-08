@@ -25,24 +25,24 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="form-control" name="firstname" placeholder="Vorname">
+                                    <input type="text" class="form-control" name="firstname" placeholder="Vorname" required>
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" name="lastname" placeholder="Nachname">
+                                    <input type="text" class="form-control" name="lastname" placeholder="Nachname" required>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="username" placeholder="Nutzername">
+                            <input type="text" class="form-control" name="username" placeholder="Nutzername" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" name="email" placeholder="Email-Adresse">
+                            <input type="email" class="form-control" name="email" placeholder="Email-Adresse" required>
                         </div>
                         <div class="form-group">
-                             <input type="password" class="form-control" name="password" placeholder="Passwort">
+                             <input type="password" class="form-control" name="password" placeholder="Passwort" minlength="8" required>
                         </div>
                         <div class="form-group">
-                             <input type="password" class="form-control" name="password2" placeholder="Passwort wiederholen">
+                             <input type="password" class="form-control" name="password2" placeholder="Passwort wiederholen" minlength="8" required>
                         </div>
                         <span class="input-group-btn"><button class="btn btn-secondary" type="submit">OK</button></span>
                     </form>

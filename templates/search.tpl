@@ -12,7 +12,7 @@
                 {elseif $notification.type == "info"}
                     {assign var="icon" value="fas fa-info"}
                 {/if}
-                <div class="alert alert-{$notification.type}" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
+                <div class="alert alert-{$notification.type} shadow" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
             {/foreach}
 
             {if !empty($data.search_items)}

@@ -13,10 +13,10 @@
                 {elseif $notification.type == "info"}
                     {assign var="icon" value="fas fa-info"}
                 {/if}
-                <div class="alert alert-{$notification.type}" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
+                <div class="alert alert-{$notification.type} shadow" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
             {/foreach}
 
-            <div class="card my-4">
+            <div class="card my-4 shadow">
                 <h5 class="card-header text-center">Registrierung</h5>
                 <div class="card-body">
                     <div class="alert alert-info" style="margin-top: 25px;"><i class="fas fa-info"></i> Diese Daten werden streng vertraulich behandelt und niemals mit Dritten geteilt.</div>

@@ -7,13 +7,7 @@ if(isset($_GET['admin'])){
 }
 $user = array('loggedin' => false, 'admin' => 0);
 if(isset($_SESSION['username'])){
-    $ui = $bloghandler->getUser($_SESSION['username']);
-    $user = array();
-    $user['loggedin'] = true;
-    $user['username'] = $_SESSION['username'];
-    $user['admin'] = $ui['admin'];
-    $user['firstname'] = $ui['firstname'];
-    $user['lastname'] = $ui['lastname'];
+    $user = $bloghandler->getUserInfoArray($_SESSION['username']);
 }
 
 $notifications = array();
@@ -43,7 +37,12 @@ if($_POST){
         $valid = $bloghandler->checkLogin($_POST['username'], $_POST['password']);
         if($valid){
             $_SESSION['username'] = $_POST['username'];
-            Header('Location: index.php');
+            $user = $bloghandler->getUserInfoArray($_SESSION['username']);
+
+            $notifications[] = array('type' => 'success', 'text' => "Du wurdest erfolgreich eingeloggt.");
+
+            $blog_entries = $bloghandler->getBlogEntries();
+            $bloghandler->loadPage('blogpostlist.tpl', array('blog_entries' => $blog_entries, 'notifications' => $notifications, 'user' => $user));
             die();
         }else{
             $notifications[] = array('type' => 'danger', 'text' => "Das hat nicht geklappt. Bitte überprüfe Deine Eingaben.");
@@ -70,8 +69,13 @@ if($_POST){
             $exists = $bloghandler->doesUserExist($username);
             if (!$exists) {
                 $bloghandler->addUser($username, $password, $email, $firstname, $lastname);
-                $_SESSION['username'] = $username;
-                Header('Location: index.php');
+                $_SESSION['username'] = $_POST['username'];
+                $user = $bloghandler->getUserInfoArray($_SESSION['username']);
+
+                $notifications[] = array('type' => 'success', 'text' => "Du hast dich erfolgreich registiert und wurdest automatisch eingeloggt.");
+
+                $blog_entries = $bloghandler->getBlogEntries();
+                $bloghandler->loadPage('blogpostlist.tpl', array('blog_entries' => $blog_entries, 'notifications' => $notifications, 'user' => $user));
                 die();
             } else {
                 $notifications[] = array('type' => 'danger', 'text' => "Ein Nutzer mit dem Namen <i>" . $username . "</i> existiert bereits.");
@@ -83,6 +87,22 @@ if($_POST){
             $bloghandler->loadPage('register.tpl', array('notifications' => $notifications, 'user' => $user));
             die();
         }
+    }else if(isset($_POST['blog_text'])){
+        $required_fields = array('blog_text', 'blog_title');
+        foreach($required_fields as $rf){
+            if(empty($_POST[$rf]) || !isset($_POST[$rf])){
+                $notifications[] = array('type' => 'danger', 'text' => "Es müssen alle Felder ausgefüllt werden.");
+                $bloghandler->loadPage('newblog.tpl', array('notifications' => $notifications, 'user' => $user));
+                die();
+            }
+        }
+
+        $bloghandler->addBlog($_POST['blog_title'], $user['firstname'].' '.$user['lastname'], base64_decode($_POST['blog_text']), 1);
+        $notifications[] = array('type' => 'success', 'text' => "Der Blogeintrag wurde erfolgreich veröffentlicht.");
+
+        $blog_entries = $bloghandler->getBlogEntries();
+        $bloghandler->loadPage('blogpostlist.tpl', array('blog_entries' => $blog_entries, 'notifications' => $notifications, 'user' => $user));
+        die();
     }
     die();
 }
@@ -102,6 +122,10 @@ if(isset($_GET['login'])){
 }
 if(isset($_GET['register'])){
     $bloghandler->loadPage('register.tpl', array('notifications' => $notifications, 'user' => $user));
+    die();
+}
+if(isset($_GET['create'])){
+    $bloghandler->loadPage('newblog.tpl', array('notifications' => $notifications, 'user' => $user));
     die();
 }
 if(isset($_GET['logout'])){

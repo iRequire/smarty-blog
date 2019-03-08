@@ -12,6 +12,8 @@
 
         <link href="https://cdn.irequire.dev/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.irequire.dev/fontawesome/5.7.2/css/all.min.css" rel="stylesheet">
+        
+        <link href="https://cdn.irequire.dev/libs/quill/quill.snow.css" rel="stylesheet">
 
         {literal}
         <style>
@@ -34,7 +36,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.php">Smarty</a>
+            <a class="navbar-brand" href=".">Smarty</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -47,7 +49,7 @@
                     </li>
                     {if $data.user.loggedin > 0}
                         <li class="nav-item">
-                            <a class="nav-link" href="?logout">Angemeldet als {$data.user.firstname} {$data.user.lastname} ({$data.user.username}, AL {$data.user.admin})</a>
+                            <a class="nav-link" href="?logout">Angemeldet als {$data.user.firstname} {$data.user.lastname} ({$data.user.username})</a>
                         </li>
                     {else}
                         <li class="nav-item">

@@ -2,7 +2,7 @@
 
 <div class="container pagebg">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 shadow">
             {foreach $data.notifications as $notification}
                 {if $notification.type == "warning"}
                     {assign var="icon" value="fas fa-exclamation"}
@@ -11,23 +11,23 @@
                 {elseif $notification.type == "info"}
                     {assign var="icon" value="fas fa-info"}
                 {/if}
-                <div class="alert alert-{$notification.type}" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
+                <div class="alert alert-{$notification.type} shadow" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
             {/foreach}
 
             {foreach from=$data.blog_entries item=blogentry}
-            <div class="card my-4">
-                <h5 class="card-header"><a href="?id={$blogentry.id}">{$blogentry.title}</a></h5>
+            <div class="card my-4 shadow">
+                <h5 class="card-header"><span class="float-left"><a href="?id={$blogentry.id}">{$blogentry.title}</a></span><span class="float-right">#{$blogentry.id}</span></h5>
                 <div class="card-body">
                     {$blogentry.text|truncate:1024:"...":false nofilter}
                 </div>
-                <div class="card-footer">
-                    von <a href="?search={$blogentry.author}">{$blogentry.author}</a>
+                <div class="card-footer align-middle">
+                    veröffentlicht am {$blogentry.date|date_format:"%d.%m.%Y %H:%M"} von <a href="?search={$blogentry.author}">{$blogentry.author}</a>
                 </div>
             </div>
             {/foreach}
         </div>
         <div class="col-md-4">
-            <div class="card my-4">
+            <div class="card my-4 shadow">
                 <h5 class="card-header">Suche</h5>
                 <div class="card-body">
                     <form method="get" action="{$smarty.server.PHP_SELF}">
@@ -38,6 +38,9 @@
                     </form>
                 </div>
             </div>
+            {if $data.user.loggedin}
+                <a href="?create">Neuer Blogeintrag</a>
+            {/if}
         </div>
     </div>
 </div>

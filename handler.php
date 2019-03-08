@@ -100,8 +100,8 @@ class BlogHandler {
     }
 
     public function addComment($blog_id, $user, $text){
-        $statement = $this->pdo->prepare("INSERT INTO blog_comments (blogid, name, text, date) VALUES (?, ?, ?, ?)");
-        $statement->execute(array($blog_id, $user, $text, time()));
+        $statement = $this->pdo->prepare("INSERT INTO blog_comments (blogid, name, text) VALUES (?, ?, ?)");
+        $statement->execute(array($blog_id, $user, $text));
     }
 
     public function doesUserExist($username){
@@ -135,6 +135,25 @@ class BlogHandler {
         $stmt = $this->pdo->prepare("SELECT * FROM blog_users WHERE username = ? LIMIT 1");
         $stmt->execute(array($username));
         return $stmt->fetch();
+    }
+
+    public function addBlog($title, $author, $text, $enable_comments){
+        $statement = $this->pdo->prepare("INSERT INTO blog_entries (title, author, text, enable_comments) VALUES (?, ?, ?, ?)");
+        $statement->execute(array($title, $author, $text, $enable_comments));
+    }
+
+    public function getUserInfoArray($username){
+        $user = array('loggedin' => false, 'admin' => 0);
+
+        $ui = self::getUser($username);
+        $user = array();
+        $user['loggedin'] = true;
+        $user['username'] = $username;
+        $user['admin'] = $ui['admin'];
+        $user['firstname'] = $ui['firstname'];
+        $user['lastname'] = $ui['lastname'];
+
+        return $user;
     }
 
     function customErrorHandler($fehlercode, $fehlertext, $fehlerdatei, $fehlerzeile)

@@ -2,7 +2,7 @@
 
 <div class="container pagebg">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 shadow">
             {foreach $data.notifications as $notification}
                 {if $notification.type == "warning"}
                     {assign var="icon" value="fas fa-exclamation"}
@@ -11,7 +11,7 @@
                 {elseif $notification.type == "info"}
                     {assign var="icon" value="fas fa-info"}
                 {/if}
-                <div class="alert alert-{$notification.type}" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
+                <div class="alert alert-{$notification.type} shadow" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
             {/foreach}
             <h1 class="mt-4">{$data.blogpost.title}</h1>
             <p class="lead">
@@ -25,7 +25,7 @@
             <h3>Kommentare</h3>
             {if $data.blogpost.enable_comments}
                 {if $data.user.loggedin}
-                    <div class="card my-4">
+                    <div class="card my-4 shadow">
                         <h5 class="card-header">Hinterlasse einen Kommentar:</h5>
                         <div class="card-body">
                             <form method="post" action="{$smarty.server.PHP_SELF}">
@@ -88,7 +88,7 @@
         </div>
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
-            <div class="card my-4">
+            <div class="card my-4 shadow">
                 <h5 class="card-header">Suche</h5>
                 <div class="card-body">
                     <form method="get" action="{$smarty.server.PHP_SELF|escape}">

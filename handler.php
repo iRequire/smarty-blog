@@ -150,8 +150,6 @@ class BlogHandler {
     }
 
     public function getUserInfoArray($username){
-        $user = array('loggedin' => false, 'admin' => 0);
-
         $ui = self::getUser($username);
         $user = array();
         $user['loggedin'] = true;
@@ -159,6 +157,7 @@ class BlogHandler {
         $user['admin'] = $ui['admin'];
         $user['firstname'] = $ui['firstname'];
         $user['lastname'] = $ui['lastname'];
+        $user['isAuthor'] = $ui['isAuthor'];
 
         return $user;
     }

@@ -1,20 +1,9 @@
-{include file="header.tpl" title="Blogeinträge" admin=$data.user.admin}
+{include file="include/header.tpl" title="Blogeinträge" admin=$data.user.admin}
 
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-8 shadow">
-            {foreach $data.notifications as $notification}
-                {if $notification.type == "danger"}
-                    {assign var="icon" value="fas fa-exclamation"}
-                {elseif $notification.type == "warning"}
-                    {assign var="icon" value="fas fa-exclamation"}
-                {elseif $notification.type == "success"}
-                    {assign var="icon" value="fas fa-check"}
-                {elseif $notification.type == "info"}
-                    {assign var="icon" value="fas fa-info"}
-                {/if}
-                <div class="alert alert-{$notification.type} shadow" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
-            {/foreach}
+            {include file="include/notifications.tpl" notifications=$data.notifications}
 
             {foreach from=$data.blog_entries item=blogentry}
             <div class="card my-4 shadow">
@@ -48,4 +37,4 @@
 </div>
 
 
-{include file="footer.tpl"}
+{include file="include/footer.tpl"}

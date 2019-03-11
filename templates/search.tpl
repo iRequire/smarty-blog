@@ -1,21 +1,10 @@
-{include file="header.tpl" title="Suche: {$data.search_query}" admin=$data.user.admin}
+{include file="include/header.tpl" title="Suche: {$data.search_query}" admin=$data.user.admin}
 
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-8">
             <h1 class="mt-4">Suchergebnisse: "{$data.search_query}"</h1>
-            {foreach $data.notifications as $notification}
-                {if $notification.type == "danger"}
-                    {assign var="icon" value="fas fa-exclamation"}
-                {elseif $notification.type == "warning"}
-                    {assign var="icon" value="fas fa-exclamation"}
-                {elseif $notification.type == "success"}
-                    {assign var="icon" value="fas fa-check"}
-                {elseif $notification.type == "info"}
-                    {assign var="icon" value="fas fa-info"}
-                {/if}
-                <div class="alert alert-{$notification.type} shadow" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
-            {/foreach}
+            {include file="include/notifications.tpl" notifications=$data.notifications}
 
             {if !empty($data.search_items)}
                 {foreach $data.search_items as $searchitem}
@@ -48,4 +37,4 @@
 </div>
 
 
-{include file="footer.tpl"}
+{include file="include/footer.tpl"}

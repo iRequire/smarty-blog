@@ -1,21 +1,11 @@
-{include file="header.tpl" title="Neuer Blogeintrag"  admin=$data.user.admin}
+{include file="include/header.tpl" title="Neuer Blogeintrag"  admin=$data.user.admin}
 
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="text-center">Blogeintrag erstellen</h1>
-            {foreach $data.notifications as $notification}
-                {if $notification.type == "danger"}
-                    {assign var="icon" value="fas fa-exclamation"}
-                {elseif $notification.type == "warning"}
-                    {assign var="icon" value="fas fa-exclamation"}
-                {elseif $notification.type == "success"}
-                    {assign var="icon" value="fas fa-check"}
-                {elseif $notification.type == "info"}
-                    {assign var="icon" value="fas fa-info"}
-                {/if}
-                <div class="alert alert-{$notification.type} shadow" style="margin-top: 25px;"><i class="{$icon}"></i> {$notification.text}</div>
-            {/foreach}
+            {include file="include/notifications.tpl" notifications=$data.notifications}
+
             <form id="createBlog" method="post" action="{$smarty.server.PHP_SELF}">
                 <input type="hidden" name="blog_text" id="blog_text">
                 <h1 class="mt-4"><input type="text" class="form-control" name="blog_title" placeholder="Titel"></h1>
@@ -34,4 +24,4 @@
 
 
 
-{include file="footer.tpl" editor=true}
+{include file="include/footer.tpl" editor=true}

@@ -1,10 +1,10 @@
 {include file="include/header.tpl" title=$data.blogpost.title  admin=$data.user.admin}
+{include file="include/notifications.tpl" notifications=$data.notifications}
 
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-8 shadow">
-            {include file="include/breadcrumb.tpl" activePage=$data.blogpost.title}
-            {include file="include/notifications.tpl" notifications=$data.notifications}
+            {include file="include/breadcrumb.tpl" activePage="Blogpost: '{$data.blogpost.title}'"}
 
             <h1 class="mt-4">{$data.blogpost.title}</h1>
             <p class="lead">

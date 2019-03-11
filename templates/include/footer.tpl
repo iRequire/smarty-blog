@@ -4,12 +4,14 @@
 
 
         <script src="https://cdn.irequire.dev/libs/js/jquery/3.3.1/jquery-3.3.1.min.js"></script>
-        <script src="https://cdn.irequire.dev/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://unpkg.com/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.irequire.dev/bootstrap/4.3.1/js/bootstrap.js"></script>
         <script src="https://cdn.irequire.dev/libs/quill/quill.min.js"></script>
         {literal}
             <script>
                 $(function () {
-                    $('[data-toggle="tooltip"]').tooltip()
+                    $('[data-toggle="tooltip"]').tooltip();
+                    $('.toast').toast('show');
                 })
             </script>
         {/literal}

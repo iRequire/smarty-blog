@@ -1,13 +1,12 @@
 {include file="include/header.tpl" title="Blogeinträge" admin=$data.user.admin}
+{include file="include/notifications.tpl" notifications=$data.notifications}
 
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-12">
             {include file="include/breadcrumb.tpl" activePage="Blogeinträge"}
         </div>
-        <div class="col-lg-8 shadow" style="padding-top: 10px;">
-            {include file="include/notifications.tpl" notifications=$data.notifications}
-
+        <div class="col-lg-8 shadow">
             {if $data.user.isAuthor}
                 <a href="?p=createBlogPost" class="btn btn-info"><i class="fas fa-plus"></i> Neuer Blogeintrag</a>
             {/if}

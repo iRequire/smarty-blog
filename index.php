@@ -31,6 +31,7 @@ if($_POST){
             $_SESSION['username'] = $_POST['username'];
             $user = $bloghandler->getUserInfoArray($_SESSION['username']);
 
+            $file = 'blogpostlist.tpl';
             $notifications[] = array('type' => 'success', 'text' => TEXT_NOTIFICATION_LOGIN_SUCCESSFUL);
         }else{
             $notifications[] = array('type' => 'danger', 'text' => TEXT_NOTIFICATION_LOGIN_FAILED);

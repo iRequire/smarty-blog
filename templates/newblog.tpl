@@ -1,10 +1,10 @@
 {include file="include/header.tpl" title="Neuer Blogeintrag"  admin=$data.user.admin}
+{include file="include/notifications.tpl" notifications=$data.notifications}
 
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="text-center">Blogeintrag erstellen</h1>
-            {include file="include/notifications.tpl" notifications=$data.notifications}
 
             <form id="createBlog" method="post" action="">
                 <input type="hidden" name="addBlogPost" value="true">

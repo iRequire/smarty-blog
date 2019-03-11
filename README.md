@@ -11,12 +11,12 @@ My first project using Smarty: Fully fledged Blog website with comments, search 
   - Only for registered and logged in users
 - Blog post creator (WYSIWYG Editor)
 - Search
-
-##### Planned features
 - Admin system
   - Delete blog posts
   - Delete comments
   - Manage users
+##### Planned features
+- Multiple languages
 #
 ##### Software used:
 - PHPStorm (IDE)

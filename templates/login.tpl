@@ -1,9 +1,9 @@
 {include file="include/header.tpl" title="Login" admin=$data.user.admin}
+{include file="include/notifications.tpl" notifications=$data.notifications}
 
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-lg-6">
-            {include file="include/notifications.tpl" notifications=$data.notifications}
 
             <div class="card my-4 shadow">
                 <h5 class="card-header text-center">Anmeldung</h5>

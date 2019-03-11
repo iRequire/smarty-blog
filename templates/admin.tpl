@@ -16,18 +16,26 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Registrierungsdatum</th>
+                                <th>Autor</th>
                                 <th>Admin</th>
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="users">
                             {foreach $data.users as $user}
                                 <tr>
                                     <td>{$user.id}</td>
                                     <td>{$user.username}</td>
-                                    <td>{$user.firstname} {$user.lastname}</td>
+                                    <td><a href="?p=search&query={$user.firstname} {$user.lastname}">{$user.firstname} {$user.lastname}</a></td>
                                     <td>{$user.email}</td>
                                     <td>{$user.register_date|date_format:"%d.%m.%Y %H:%M"}</td>
+                                    <td>
+                                        {if $user.isAuthor}
+                                            <span class="badge badge-success">Ja</span>
+                                        {else}
+                                            <span class="badge badge-danger">Nein</span>
+                                        {/if}
+                                    </td>
                                     <td>
                                         {if $user.admin}
                                             <span class="badge badge-success">Ja</span>
@@ -36,14 +44,20 @@
                                         {/if}
                                     </td>
                                     <td>
-                                        <span class="float-right">
-                                            {if $user.admin}
-                                                <a href="?adm_togAdmin={$user.id}" class="btn-sm btn-warning"><i class="fas fa-chevron-down"></i> Adminrechte entfernen</a>
+                                        <form method="post" action="">
+                                            <input type="hidden" name="admin__userID" value="{$user.id}">
+                                            {if $user.isAuthor}
+                                                <button type="submit" class="btn btn-sm btn-warning" name="admin__do" value="togAuthor" data-toggle="tooltip" data-placement="top" title="Autorenrechte entfernen"><i class="fas fa-angle-double-down"></i> Autor</button>
                                             {else}
-                                                <a href="?adm_togAdmin={$user.id}" class="btn-sm btn-success"><i class="fas fa-chevron-up"></i> Zum Admin machen</a>
+                                                <button type="submit" class="btn btn-sm btn-success" name="admin__do" value="togAuthor" data-toggle="tooltip" data-placement="top" title="Zum Autor ernennen"><i class="fas fa-angle-double-up"></i> Autor</button>
                                             {/if}
-                                            <a href="?adm_delUser={$user.id}" class="btn-sm btn-danger"><i class="fas fa-times"></i> Löschen</a>
-                                        </span>
+                                            {if $user.admin}
+                                                <button type="submit" class="btn btn-sm btn-warning" name="admin__do" value="togAdmin" data-toggle="tooltip" data-placement="top" title="Adminrechte entfernen"><i class="fas fa-angle-double-down"></i> Admin</button>
+                                            {else}
+                                                <button type="submit" class="btn btn-sm btn-success" name="admin__do" value="togAdmin" data-toggle="tooltip" data-placement="top" title="Zum Admin ernennen"><i class="fas fa-angle-double-up"></i> Admin</button>
+                                            {/if}
+                                            <button type="submit" class="btn btn-sm btn-danger" name="admin__do" value="delete"><i class="fas fa-times"></i>&nbsp;</button>
+                                        </form>
                                     </td>
                                 </tr>
                             {/foreach}

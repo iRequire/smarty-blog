@@ -6,7 +6,8 @@
             <h1 class="text-center">Blogeintrag erstellen</h1>
             {include file="include/notifications.tpl" notifications=$data.notifications}
 
-            <form id="createBlog" method="post" action="{$smarty.server.PHP_SELF}">
+            <form id="createBlog" method="post" action="">
+                <input type="hidden" name="addBlogPost" value="true">
                 <input type="hidden" name="blog_text" id="blog_text">
                 <h1 class="mt-4"><input type="text" class="form-control" name="blog_title" placeholder="Titel"></h1>
                 <hr>

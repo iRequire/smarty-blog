@@ -7,12 +7,18 @@
 
             <h1 class="mt-4">{$data.blogpost.title}</h1>
             <p class="lead">
-                Veröffentlicht am {$data.blogpost.date|date_format:"%d.%m.%Y %H:%M"} von <a href="?search={$data.blogpost.author}">{$data.blogpost.author}</a>
+                Veröffentlicht am {$data.blogpost.date|date_format:"%d.%m.%Y %H:%M"} von <a href="?p=search&query={$data.blogpost.author}">{$data.blogpost.author}</a>
             </p>
             <hr>
             <p class="lead">{$data.blogpost.text nofilter}</p>
 
-
+            {if $data.user.admin}
+                <hr>
+                <form method="post" action="">
+                    <input type="hidden" name="admin__blogID" value="{$data.blogpost.id}">
+                    <button class="btn btn-sm btn-danger" name="admin__do" value="deleteBlogPost"><i class="fas fa-times"></i> Blogpost löschen</button>
+                </form>
+            {/if}
             <hr>
             <h3>Kommentare</h3>
             {if $data.blogpost.enable_comments}
@@ -20,7 +26,8 @@
                     <div class="card my-4 shadow">
                         <h5 class="card-header">Hinterlasse einen Kommentar:</h5>
                         <div class="card-body">
-                            <form method="post" action="{$smarty.server.PHP_SELF}">
+                            <form method="post" action="">
+                                <input type="hidden" name="addComment" value="1">
                                 <input type="hidden" name="comment_blogid" value="{$data.blogpost.id}">
                                 <div class="form-group">
                                     <input class="form-control" type="text" value="{$data.user.firstname} {$data.user.lastname}" readonly>
@@ -41,57 +48,27 @@
 
             {foreach from=$data.comments item=comment}
                 {assign var=rand value=0|mt_rand:99}
+                <hr>
                 <div class="media mb-4">
                     <img class="d-flex mr-3 rounded-circle" src="https://randomuser.me/api/portraits/men/{$rand}.jpg" height="40px" width="40px" alt="">
                     <div class="media-body">
-                        <h5 class="mt-0">{$comment.name} ({$comment.date|date_format:"%d.%m.%Y %H:%M"})</h5>
+                        <h5 class="mt-0">
+                            {$comment.name} ({$comment.date|date_format:"%d.%m.%Y %H:%M"})
+                        </h5>
                         {$comment.text}
                     </div>
+                    {if $data.user.admin}
+                        <form method="post" action="">
+                            <input type="hidden" name="admin__do" value="deleteComment">
+                            <input type="hidden" name="admin__commentID" value="{$comment.id}">
+                            <button class="btn btn-sm btn-danger"><i class="fas fa-times"></i> Kommentar löschen</button>
+                        </form>
+                    {/if}
                 </div>
             {/foreach}
-
-            <!-- Comment with nested comments
-            <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                    <h5 class="mt-0">Commenter Name</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-                    <div class="media mt-4">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <h5 class="mt-0">Commenter Name</h5>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
-
-                    <div class="media mt-4">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <h5 class="mt-0">Commenter Name</h5>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            -->
-
         </div>
         <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-            <div class="card my-4 shadow">
-                <h5 class="card-header">Suche</h5>
-                <div class="card-body">
-                    <form method="get" action="{$smarty.server.PHP_SELF|escape}">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Suchbegriff">
-                            <span class="input-group-btn"><button class="btn btn-secondary" type="button">OK</button></span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        {include file="include/search.tpl"}
     </div>
 </div>
 

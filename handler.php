@@ -149,6 +149,11 @@ class BlogHandler {
         $statement->execute(array($title, $author, $text, $enable_comments));
     }
 
+    public function deleteBlog($id){
+        $statement = $this->pdo->prepare('DELETE FROM blog_entries WHERE id = ?');
+        $statement->execute(array($id));
+    }
+
     public function getUserInfoArray($username){
         $ui = self::getUser($username);
         $user = array();
@@ -180,6 +185,11 @@ class BlogHandler {
 
     public function deleteUser($id){
         $statement = $this->pdo->prepare("DELETE FROM blog_users WHERE id = ?");
+        $statement->execute(array($id));
+    }
+
+    public function deleteComment($id){
+        $statement = $this->pdo->prepare('DELETE FROM blog_comments WHERE id = ?');
         $statement->execute(array($id));
     }
 

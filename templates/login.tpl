@@ -8,7 +8,7 @@
             <div class="card my-4 shadow">
                 <h5 class="card-header text-center">Anmeldung</h5>
                 <div class="card-body">
-                    <form method="post" action="{$smarty.server.PHP_SELF}">
+                    <form method="post" action="">
                         <input type="hidden" name="login" value="true">
                         <div class="input-group">
                             <input type="text" class="form-control" name="username" placeholder="Nutzername" required>

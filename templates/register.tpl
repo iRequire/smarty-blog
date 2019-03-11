@@ -9,7 +9,7 @@
                 <h5 class="card-header text-center">Registrierung</h5>
                 <div class="card-body">
                     <div class="alert alert-info" style="margin-top: 25px;"><i class="fas fa-info"></i> Diese Daten werden streng vertraulich behandelt und niemals mit Dritten geteilt.</div>
-                    <form method="post" action="{$smarty.server.PHP_SELF}">
+                    <form method="post" action="">
                         <input type="hidden" name="register" value="true">
                         <div class="form-group">
                             <div class="row">

@@ -6,6 +6,14 @@
         <script src="https://cdn.irequire.dev/libs/js/jquery/3.3.1/jquery-3.3.1.min.js"></script>
         <script src="https://cdn.irequire.dev/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.irequire.dev/libs/quill/quill.min.js"></script>
+        {literal}
+            <script>
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                })
+            </script>
+        {/literal}
+
         {assign var='editor' value=$editor|default:false}
         {if $editor}
             {literal}

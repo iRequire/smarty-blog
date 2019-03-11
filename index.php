@@ -195,6 +195,7 @@ switch($page){
         if($user['admin']){
             $file = 'admin.tpl';
             $data['users'] = $bloghandler->getUsers();
+            $data['constants'] = get_defined_constants(true)['user'];
         }else{
             $notifications[] = array('type' => 'danger', 'text' => TEXT_NOTIFICATION_NO_PERMISSIONS);
         }

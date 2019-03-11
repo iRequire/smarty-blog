@@ -3,6 +3,7 @@
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-8 shadow">
+            {include file="include/breadcrumb.tpl" activePage="Suche"}
             <h1 class="mt-4">Suchergebnisse: "{$data.search_query}"</h1>
             {include file="include/notifications.tpl" notifications=$data.notifications}
 

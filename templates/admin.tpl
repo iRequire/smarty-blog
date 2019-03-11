@@ -3,6 +3,7 @@
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-12 shadow">
+            {include file="include/breadcrumb.tpl" activePage="Admin"}
             {include file="include/notifications.tpl" notifications=$data.notifications}
 
             <div class="card my-4 shadow">
@@ -56,7 +57,7 @@
                                             {else}
                                                 <button type="submit" class="btn btn-sm btn-success" name="admin__do" value="togAdmin" data-toggle="tooltip" data-placement="top" title="Zum Admin ernennen"><i class="fas fa-angle-double-up"></i> Admin</button>
                                             {/if}
-                                            <button type="submit" class="btn btn-sm btn-danger" name="admin__do" value="delete"><i class="fas fa-times"></i>&nbsp;</button>
+                                            <button type="submit" class="btn btn-sm btn-danger" name="admin__do" value="delete"><i class="fas fa-times"></i> Löschen</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -65,6 +66,37 @@
                     </table>
                 </div>
             </div>
+
+            <div class="card my-4 shadow">
+                <h5 class="card-header">Konstanten</h5>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Wert</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $data.constants as $key=>$const}
+                            {if $key == "DBPASS"}{assign var="const" value="** CENSORED **"}{/if}
+                            {if $key|strpos:'TEXT'===0}
+                                {assign var="type" value="primary"}
+                            {elseif $key|strpos:'DB'===0}
+                                {assign var="type" value="info"}
+                            {elseif $key|strpos:'SMARTY'===0}
+                                {assign var="type" value="warning"}
+                            {/if}
+                            <tr class="table-{$type}">
+                                <td>{$key}</td>
+                                <td>{$const}</td>
+                            </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

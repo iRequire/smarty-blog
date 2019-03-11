@@ -2,6 +2,9 @@
 
 <div class="container pagebg">
     <div class="row">
+        <div class="col-lg-12">
+            {include file="include/breadcrumb.tpl" activePage="Blogeinträge"}
+        </div>
         <div class="col-lg-8 shadow" style="padding-top: 10px;">
             {include file="include/notifications.tpl" notifications=$data.notifications}
 

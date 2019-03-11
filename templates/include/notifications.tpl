@@ -8,7 +8,7 @@
     {elseif $notification.type == "info"}
         {assign var="icon" value="fas fa-info"}
     {/if}
-    <div class="toast" style="position: fixed; z-index: 1000; right: 10px; top: 60px;" data-delay="5000">
+    <div class="toast" style="width: 400px; display: inline-block; position: fixed; z-index: 1000; top: 60px; margin-left: calc(50% - 200px);" data-delay="5000">
         <div class="toast-header">
             <strong class="mr-auto">Benachrichtigung</strong>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">

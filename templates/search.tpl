@@ -21,7 +21,7 @@
                 {/foreach}
             {/if}
         </div>
-        {include file="include/search.tpl"}
+        {include file="include/sidebar.tpl" user=$data.user}
     </div>
 </div>
 

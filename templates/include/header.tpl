@@ -49,7 +49,7 @@
                     </li>
                     {if $data.user.loggedin > 0}
                         <li class="nav-item">
-                            <a class="nav-link" href="?p=logout">Angemeldet als {$data.user.firstname} {$data.user.lastname} ({$data.user.username})</a>
+                            <a class="nav-link" href="?p=logout" data-toggle="tooltip" data-placement="bottom" title="Abmelden">Angemeldet als {$data.user.firstname} {$data.user.lastname} ({$data.user.username})</a>
                         </li>
                     {else}
                         <li class="nav-item">

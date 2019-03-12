@@ -163,6 +163,7 @@ class BlogHandler {
         $user['firstname'] = $ui['firstname'];
         $user['lastname'] = $ui['lastname'];
         $user['isAuthor'] = $ui['isAuthor'];
+        $user['register_date'] = $ui['register_date'];
 
         return $user;
     }

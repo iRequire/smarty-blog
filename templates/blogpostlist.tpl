@@ -6,10 +6,12 @@
         <div class="col-lg-12">
             {include file="include/breadcrumb.tpl" activePage="Blogeinträge"}
         </div>
-        <div class="col-lg-8 shadow">
-            {if $data.user.isAuthor}
+        {if $data.user.isAuthor}
+            <div class="col-lg-12">
                 <a href="?p=createBlogPost" class="btn btn-info"><i class="fas fa-plus"></i> Neuer Blogeintrag</a>
-            {/if}
+            </div>
+        {/if}
+        <div class="col-lg-8 shadow">
             {foreach from=$data.blog_entries item=blogentry}
             <div class="card my-4 shadow">
                 <h5 class="card-header"><span class="float-left"><a href="?p=blog&id={$blogentry.id}">{$blogentry.title}</a></span><span class="float-right">#{$blogentry.id}</span></h5>
@@ -22,7 +24,7 @@
             </div>
             {/foreach}
         </div>
-        {include file="include/search.tpl"}
+        {include file="include/sidebar.tpl" user=$data.user}
     </div>
 </div>
 

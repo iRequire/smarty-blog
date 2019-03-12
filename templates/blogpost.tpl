@@ -69,7 +69,7 @@
             {/foreach}
         </div>
         <!-- Sidebar Widgets Column -->
-        {include file="include/search.tpl"}
+        {include file="include/sidebar.tpl" user=$data.user}
     </div>
 </div>
 

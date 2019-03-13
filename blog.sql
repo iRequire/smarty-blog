@@ -12,34 +12,34 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Exportiere Datenbank Struktur für arbeit
-CREATE DATABASE IF NOT EXISTS `arbeit` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `arbeit`;
+-- Exportiere Datenbank Struktur für blog
+CREATE DATABASE IF NOT EXISTS `blog` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `blog`;
 
--- Exportiere Struktur von Tabelle arbeit.blog_comments
+-- Exportiere Struktur von Tabelle blog.blog_comments
 CREATE TABLE IF NOT EXISTS `blog_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `blogid` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
+  `name` int(11) NOT NULL,
   `text` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
--- Exportiere Struktur von Tabelle arbeit.blog_entries
+-- Exportiere Struktur von Tabelle blog.blog_entries
 CREATE TABLE IF NOT EXISTS `blog_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(128) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `author` varchar(64) NOT NULL,
+  `author` int(11) NOT NULL,
   `text` text NOT NULL,
   `enable_comments` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
--- Exportiere Struktur von Tabelle arbeit.blog_users
+-- Exportiere Struktur von Tabelle blog.blog_users
 CREATE TABLE IF NOT EXISTS `blog_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL,
@@ -49,8 +49,9 @@ CREATE TABLE IF NOT EXISTS `blog_users` (
   `lastname` varchar(64) NOT NULL,
   `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `isAuthor` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

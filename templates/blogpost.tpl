@@ -4,7 +4,7 @@
 <div class="container pagebg">
     <div class="row">
         <div class="col-lg-12">
-            {include file="include/breadcrumb.tpl" activePage="{$data.ui.TEXT_UI_BLOGPOSTS}"}
+            {include file="include/breadcrumb.tpl" activePage="{$data.ui.TEXT_UI_BLOGPOST}"}
         </div>
         <div class="col-lg-8 shadow">
             <h1 class="mt-4">{$data.blogpost.title}</h1>

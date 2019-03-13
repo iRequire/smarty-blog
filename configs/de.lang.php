@@ -26,6 +26,7 @@ define('TEXT_NOTIFICATION_USER_EDITED',                 'Der Nutzer wurde erfolg
 
 
 define('TEXT_UI_BLOGPOSTS',                             'Blogeinträge');
+define('TEXT_UI_BLOGPOST',                              'Blogeintrag');
 define('TEXT_UI_NEW_BLOG_POST',                         'Neuer Blogeintrag');
 define('TEXT_UI_LOGIN',                                 'Anmelden');
 define('TEXT_UI_LOGOUT',                                'Abmelden');

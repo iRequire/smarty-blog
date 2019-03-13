@@ -70,7 +70,7 @@ class BlogHandler {
         $count = 0;
 
 
-        $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE title LIKE ?");
+        $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE title LIKE ? ORDER BY date DESC");
         $statement->execute(array('%'.$search_query.'%'));
         while($row = $statement->fetch()) {
             $row['author_name'] = self::getFullNameByID($row['author']);
@@ -78,7 +78,7 @@ class BlogHandler {
         }
         $count += $statement->rowCount();
 
-        $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE author LIKE ?");
+        $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE author LIKE ? ORDER BY date DESC");
         $statement->execute(array('%'.self::getUserIDByName($search_query).'%'));
         while($row = $statement->fetch()) {
             $row['author_name'] = self::getFullNameByID($row['author']);
@@ -86,7 +86,7 @@ class BlogHandler {
         }
         $count += $statement->rowCount();
 
-        $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE text LIKE ?");
+        $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE text LIKE ? ORDER BY date DESC");
         $statement->execute(array('%'.$search_query.'%'));
         while($row = $statement->fetch()) {
             $row['author_name'] = self::getFullNameByID($row['author']);
@@ -181,6 +181,7 @@ class BlogHandler {
         $user['id'] = $ui['id'];
         $user['username'] = $username;
         $user['admin'] = $ui['admin'];
+        $user['language'] = $ui['language'];
         $user['firstname'] = $ui['firstname'];
         $user['lastname'] = $ui['lastname'];
         $user['isAuthor'] = $ui['isAuthor'];

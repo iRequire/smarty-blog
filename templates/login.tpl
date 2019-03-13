@@ -6,17 +6,17 @@
         <div class="col-lg-6">
 
             <div class="card my-4 shadow">
-                <h5 class="card-header text-center">Anmeldung</h5>
+                <h5 class="card-header text-center">{$data.ui.TEXT_UI_LOGIN}</h5>
                 <div class="card-body">
                     <form method="post" action="">
                         <input type="hidden" name="login" value="true">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="username" placeholder="Nutzername" required>
-                            <input type="password" class="form-control" name="password" placeholder="Passwort" minlength="8" required>
+                            <input type="text" class="form-control" name="username" placeholder="{$data.ui.TEXT_UI_USERNAME}" required>
+                            <input type="password" class="form-control" name="password" placeholder="{$data.ui.TEXT_UI_PASSWORD}" minlength="8" required>
                             <span class="input-group-btn"><button class="btn btn-secondary" type="submit">OK</button></span>
                         </div>
                     </form>
-                    <a href="?p=register">Noch nicht registriert? Hier registrieren!</a>
+                    <a href="?p=register">{$data.ui.TEXT_UI_REGISTERNOTICE}</a>
                 </div>
             </div>
         </div>

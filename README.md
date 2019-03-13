@@ -23,10 +23,11 @@ My first project using Smarty: Fully fledged Blog website with comments, search 
 - XAMPP (Webserver & MariaDB)
 - HeidiSQL (MariaDB client)
 
-##### 3rd party libraries used:
+##### 3rd party usages:
 - jQuery
 - Bootstrap 4
 - FontAwesome 5
 - QuillJS
+- Flag Icons by Muharrem Şenyıl (https://www.iconfinder.com/iconsets/195-flat-flag-psd-icons)
 
 

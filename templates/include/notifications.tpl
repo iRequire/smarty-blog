@@ -11,7 +11,7 @@
         {/if}
         <div class="toast" data-delay="5000">
             <div class="toast-header">
-                <strong class="mr-auto">Benachrichtigung</strong>
+                <strong class="mr-auto">{$data.ui.TEXT_UI_NOTIFICATION}</strong>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

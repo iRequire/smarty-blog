@@ -1,5 +1,5 @@
         <div class="footer">
-            Dieser Blog wurde mit Smarty entwickelt. | &copy; {$smarty.now|date_format:"%Y"}
+            {$data.ui.TEXT_UI_FOOTER} | &copy; {$smarty.now|date_format:"%Y"}
         </div>
 
 

@@ -7,17 +7,17 @@
             {include file="include/breadcrumb.tpl" activePage="Admin"}
 
             <div class="card my-4 shadow">
-                <h5 class="card-header">Benutzerverwaltung</h5>
+                <h5 class="card-header">{$data.ui.TEXT_UI_USERMANAGEMENT}</h5>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nutzername</th>
+                                <th>{$data.ui.TEXT_UI_USERNAME}</th>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Registrierungsdatum</th>
-                                <th>Autor</th>
+                                <th>{$data.ui.TEXT_UI_EMAIL}</th>
+                                <th>{$data.ui.TEXT_UI_REGISTERDATE}</th>
+                                <th>{$data.ui.TEXT_UI_AUTHOR}</th>
                                 <th>Admin</th>
                                 <th></th>
                             </tr>
@@ -32,16 +32,16 @@
                                     <td>{$user.register_date|date_format:"%d.%m.%Y %H:%M"}</td>
                                     <td>
                                         {if $user.isAuthor}
-                                            <span class="badge badge-success">Ja</span>
+                                            <span class="badge badge-success">{$data.ui.TEXT_UI_YES}</span>
                                         {else}
-                                            <span class="badge badge-danger">Nein</span>
+                                            <span class="badge badge-danger">{$data.ui.TEXT_UI_NO}</span>
                                         {/if}
                                     </td>
                                     <td>
                                         {if $user.admin}
-                                            <span class="badge badge-success">Ja</span>
+                                            <span class="badge badge-success">{$data.ui.TEXT_UI_YES}</span>
                                         {else}
-                                            <span class="badge badge-danger">Nein</span>
+                                            <span class="badge badge-danger">{$data.ui.TEXT_UI_NO}</span>
                                         {/if}
                                     </td>
                                     <td>
@@ -49,16 +49,16 @@
                                             <form method="post" action="">
                                                 <input type="hidden" name="admin__userID" value="{$user.id}">
                                                 {if $user.isAuthor}
-                                                    <button type="submit" class="btn btn-sm btn-warning" name="admin__do" value="togAuthor" data-toggle="tooltip" data-placement="top" title="Autorenrechte entfernen"><i class="fas fa-angle-double-down"></i> Autor</button>
+                                                    <button type="submit" class="btn btn-sm btn-warning" name="admin__do" value="togAuthor" data-toggle="tooltip" data-placement="top" title="{$data.ui.TEXT_UI_ADMIN_AUTHORNOTICE1}"><i class="fas fa-angle-double-down"></i> {$data.ui.TEXT_UI_AUTHOR}</button>
                                                 {else}
-                                                    <button type="submit" class="btn btn-sm btn-success" name="admin__do" value="togAuthor" data-toggle="tooltip" data-placement="top" title="Zum Autor ernennen"><i class="fas fa-angle-double-up"></i> Autor</button>
+                                                    <button type="submit" class="btn btn-sm btn-success" name="admin__do" value="togAuthor" data-toggle="tooltip" data-placement="top" title="{$data.ui.TEXT_UI_ADMIN_AUTHORNOTICE2}"><i class="fas fa-angle-double-up"></i> {$data.ui.TEXT_UI_AUTHOR}</button>
                                                 {/if}
                                                 {if $user.admin}
-                                                    <button type="submit" class="btn btn-sm btn-warning" name="admin__do" value="togAdmin" data-toggle="tooltip" data-placement="top" title="Adminrechte entfernen"><i class="fas fa-angle-double-down"></i> Admin</button>
+                                                    <button type="submit" class="btn btn-sm btn-warning" name="admin__do" value="togAdmin" data-toggle="tooltip" data-placement="top" title="{$data.ui.TEXT_UI_ADMIN_ADMINNOTICE1}"><i class="fas fa-angle-double-down"></i> Admin</button>
                                                 {else}
-                                                    <button type="submit" class="btn btn-sm btn-success" name="admin__do" value="togAdmin" data-toggle="tooltip" data-placement="top" title="Zum Admin ernennen"><i class="fas fa-angle-double-up"></i> Admin</button>
+                                                    <button type="submit" class="btn btn-sm btn-success" name="admin__do" value="togAdmin" data-toggle="tooltip" data-placement="top" title="{$data.ui.TEXT_UI_ADMIN_ADMINNOTICE2}"><i class="fas fa-angle-double-up"></i> Admin</button>
                                                 {/if}
-                                                <button type="submit" class="btn btn-sm btn-danger" name="admin__do" value="delete" data-toggle="tooltip" data-placement="top" title="Benutzer löschen"><i class="fas fa-times"></i> Löschen</button>
+                                                <button type="submit" class="btn btn-sm btn-danger" name="admin__do" value="delete" data-toggle="tooltip" data-placement="top" title="Benutzer löschen"><i class="fas fa-times"></i> {$data.ui.TEXT_UI_DELETE}</button>
                                             </form>
                                         </div>
                                     </td>
@@ -70,7 +70,7 @@
             </div>
 
             <div class="card my-4 shadow">
-                <h5 class="card-header">Konstanten</h5>
+                <h5 class="card-header">{$data.ui.TEXT_UI_CONSTANTS}</h5>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <thead>

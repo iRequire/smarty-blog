@@ -109,6 +109,12 @@ if($_POST){
                     $bloghandler->deleteComment($commentID);
                     $notifications[] = array('type' => 'success', 'text' => TEXT_NOTIFICATION_COMMENT_DELETED);
                     break;
+
+                case 'toggleBlogComments':
+                    $blogid = $_POST['admin__blogID'];
+                    $bloghandler->toggleBlogComments($blogid);
+                    $notifications[] = array('type' => 'success', 'text' => TEXT_NOTIFICATION_COMMENTS_TOGGLED);
+                    break;
             }
         }else{
             $notifications[] = array('type' => 'danger', 'text' => TEXT_NOTIFICATION_NO_PERMISSIONS);

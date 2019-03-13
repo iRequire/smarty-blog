@@ -215,6 +215,11 @@ class BlogHandler {
         $statement->execute(array($id));
     }
 
+    public function toggleBlogComments($blog_id){
+        $statement = $this->pdo->prepare("UPDATE blog_entries SET enable_comments = IF(enable_comments=1, 0, 1);");
+        $statement->execute();
+    }
+
     function customErrorHandler($fehlercode, $fehlertext, $fehlerdatei, $fehlerzeile)
     {
         if (!(error_reporting() & $fehlercode)) {

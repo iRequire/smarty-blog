@@ -18,6 +18,11 @@
                 <form method="post" action="">
                     <input type="hidden" name="admin__blogID" value="{$data.blogpost.id}">
                     <button class="btn btn-sm btn-danger" name="admin__do" value="deleteBlogPost"><i class="fas fa-times"></i> Blogpost löschen</button>
+                    {if $data.blogpost.enable_comments}
+                        <button class="btn btn-sm btn-warning" name="admin__do" value="toggleBlogComments"><i class="fas fa-minus"></i> Kommentare deaktivieren</button>
+                    {else}
+                        <button class="btn btn-sm btn-success" name="admin__do" value="toggleBlogComments"><i class="fas fa-plus"></i> Kommentare aktivieren</button>
+                    {/if}
                 </form>
             {/if}
             <hr>

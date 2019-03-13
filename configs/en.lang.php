@@ -6,6 +6,7 @@ define('TEXT_NOTIFICATION_BLOGPOST_PUBLISHED',          'The blog post was publi
 define('TEXT_NOTIFICATION_BLOGPOST_DELETED',            'The blog post was deleted successfully.');
 define('TEXT_NOTIFICATION_COMMENT_PUBLISHED',           'The comment was published successfully.');
 define('TEXT_NOTIFICATION_COMMENT_DELETED',             'The comment was deleted successfully.');
+define('TEXT_NOTIFICATION_COMMENTS_TOGGLED',            'Comments have been successfully enabled/disabled for this blog post.');
 // Registration/Login
 define('TEXT_NOTIFICATION_MISSING_FORM_INPUTS',         'All fields have to be filled out.');
 define('TEXT_NOTIFICATION_PASSWORD_LENGTH',             'The password must be at least 8 characters long.');

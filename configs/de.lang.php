@@ -6,6 +6,7 @@ define('TEXT_NOTIFICATION_BLOGPOST_PUBLISHED',          'Der Blogeintrag wurde e
 define('TEXT_NOTIFICATION_BLOGPOST_DELETED',            'Der Blogeintrag wurde erfolgreich gelöscht.');
 define('TEXT_NOTIFICATION_COMMENT_PUBLISHED',           'Der Kommentar wurde erfolgreich veröffentlicht.');
 define('TEXT_NOTIFICATION_COMMENT_DELETED',             'Der Kommentar wurde erfolgreich gelöscht.');
+define('TEXT_NOTIFICATION_COMMENTS_TOGGLED',            'Kommentare wurden für diesen Blogeintrag erfolgreich de/aktiviert.');
 // Registration/Login
 define('TEXT_NOTIFICATION_MISSING_FORM_INPUTS',         'Es müssen alle Felder ausgefüllt werden.');
 define('TEXT_NOTIFICATION_PASSWORD_LENGTH',             'Das Passwort muss mindestens 8 Zeichen lang sein.');

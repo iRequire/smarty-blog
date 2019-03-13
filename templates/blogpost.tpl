@@ -27,7 +27,7 @@
                 </form>
             {/if}
             <hr>
-            <h3>Kommentare</h3>
+            <h3>{$data.ui.TEXT_UI_COMMENTS}</h3>
             {if $data.blogpost.enable_comments}
                 {if $data.user.loggedin}
                     <div class="card my-4 shadow">

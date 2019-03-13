@@ -58,7 +58,7 @@
                                                 {else}
                                                     <button type="submit" class="btn btn-sm btn-success" name="admin__do" value="togAdmin" data-toggle="tooltip" data-placement="top" title="{$data.ui.TEXT_UI_ADMIN_ADMINNOTICE2}"><i class="fas fa-angle-double-up"></i> Admin</button>
                                                 {/if}
-                                                <button type="submit" class="btn btn-sm btn-danger" name="admin__do" value="delete" data-toggle="tooltip" data-placement="top" title="Benutzer löschen"><i class="fas fa-times"></i> {$data.ui.TEXT_UI_DELETE}</button>
+                                                <button type="submit" class="btn btn-sm btn-danger" name="admin__do" value="delete" data-toggle="tooltip" data-placement="top" title="{$data.ui.TEXT_UI_DELETEUSER}"><i class="fas fa-times"></i> {$data.ui.TEXT_UI_DELETE}</button>
                                             </form>
                                         </div>
                                     </td>

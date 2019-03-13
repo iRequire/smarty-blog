@@ -60,6 +60,8 @@ define('TEXT_UI_ADMIN_AUTHORNOTICE1',                   'Remove Author privilege
 define('TEXT_UI_ADMIN_AUTHORNOTICE2',                   'Make author');
 define('TEXT_UI_ADMIN_ADMINNOTICE1',                    'Remove admin privileges');
 define('TEXT_UI_ADMIN_ADMINNOTICE2',                    'Make admin');
+define('TEXT_UI_DELETEUSER',                            'Delete user');
 define('TEXT_UI_YES',                                   'Yes');
 define('TEXT_UI_NO',                                    'No');
 define('TEXT_UI_CONSTANTS',                             'Constants');
+define('TEXT_UI_COMMENTS',                              'Comments');

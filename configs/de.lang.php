@@ -59,6 +59,8 @@ define('TEXT_UI_ADMIN_AUTHORNOTICE1',                   'Autorenrechte entfernen
 define('TEXT_UI_ADMIN_AUTHORNOTICE2',                   'Zum Autor ernennen');
 define('TEXT_UI_ADMIN_ADMINNOTICE1',                    'Adminrechte entfernen');
 define('TEXT_UI_ADMIN_ADMINNOTICE2',                    'Zum Admin ernennen');
+define('TEXT_UI_DELETEUSER',                            'Benutzer löschen');
 define('TEXT_UI_YES',                                   'Ja');
 define('TEXT_UI_NO',                                    'Nein');
 define('TEXT_UI_CONSTANTS',                             'Konstanten');
+define('TEXT_UI_COMMENTS',                              'Kommentare');

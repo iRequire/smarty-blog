@@ -10,8 +10,13 @@ $file = 'blogpostlist.tpl';
 
 $user = array('loggedin' => false, 'admin' => 0, 'isAuthor' => 0);
 if(isset($_SESSION['username'])){
+    $languages = array('de', 'en');
     $user = $bloghandler->getUserInfoArray($_SESSION['username']);
-    require_once 'configs/'.$user['language'].'.lang.php';
+    if(!in_array($user['language'], $languages)){
+        require_once 'configs/en.lang.php';
+    }else{
+        require_once 'configs/'.$user['language'].'.lang.php';
+    }
 }else{
     require_once 'configs/en.lang.php';
 }

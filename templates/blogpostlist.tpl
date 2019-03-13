@@ -19,7 +19,7 @@
                     {$blogentry.text|truncate:1024:"...":false nofilter}
                 </div>
                 <div class="card-footer align-middle">
-                    veröffentlicht am {$blogentry.date|date_format:"%d.%m.%Y %H:%M"} von <a href="?p=search&query={$blogentry.author}">{$blogentry.author}</a>
+                    veröffentlicht am {$blogentry.date|date_format:"%d.%m.%Y %H:%M"} von <a href="?p=search&query={$blogentry.author_name}">{$blogentry.author_name}</a>
                 </div>
             </div>
             {/foreach}

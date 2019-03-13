@@ -15,7 +15,7 @@
                             {$searchitem.text|truncate:1024:"...":false nofilter}
                         </div>
                         <div class="card-footer">
-                            von <a href="?p=search&query={$searchitem.author}">{$searchitem.author}</a>
+                            von <a href="?p=search&query={$searchitem.author_name}">{$searchitem.author_name}</a>
                         </div>
                     </div>
                 {/foreach}

@@ -8,7 +8,7 @@
 
             <h1 class="mt-4">{$data.blogpost.title}</h1>
             <p class="lead">
-                Veröffentlicht am {$data.blogpost.date|date_format:"%d.%m.%Y %H:%M"} von <a href="?p=search&query={$data.blogpost.author}">{$data.blogpost.author}</a>
+                Veröffentlicht am {$data.blogpost.date|date_format:"%d.%m.%Y %H:%M"} von <a href="?p=search&query={$data.blogpost.author_name}">{$data.blogpost.author_name}</a>
             </p>
             <hr>
             <p class="lead">{$data.blogpost.text nofilter}</p>
@@ -54,7 +54,7 @@
                     <img class="d-flex mr-3 rounded-circle" src="https://randomuser.me/api/portraits/men/{$rand}.jpg" height="40px" width="40px" alt="">
                     <div class="media-body">
                         <h5 class="mt-0">
-                            {$comment.name} ({$comment.date|date_format:"%d.%m.%Y %H:%M"})
+                            {$comment.author_name} ({$comment.date|date_format:"%d.%m.%Y %H:%M"})
                         </h5>
                         {$comment.text}
                     </div>

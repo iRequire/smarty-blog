@@ -128,7 +128,7 @@ if($_POST){
             }
         }
         if($ok) {
-            $bloghandler->addBlog($_POST['blog_title'], $user['firstname'] . ' ' . $user['lastname'], base64_decode($_POST['blog_text']), 1);
+            $bloghandler->addBlog($_POST['blog_title'], $user['id'], base64_decode($_POST['blog_text']), 1);
             $notifications[] = array('type' => 'success', 'text' => TEXT_NOTIFICATION_BLOGPOST_PUBLISHED);
         }
     }
@@ -144,7 +144,7 @@ if($_POST){
             }
         }
         if($ok) {
-            $bloghandler->addComment($_POST['comment_blogid'], $user['firstname'] . ' ' . $user['lastname'], $_POST['comment_text']);
+            $bloghandler->addComment($_POST['comment_blogid'], $user['id'], $_POST['comment_text']);
             $notifications[] = array('type' => 'success', 'text' => TEXT_NOTIFICATION_COMMENT_PUBLISHED);
         }
     }

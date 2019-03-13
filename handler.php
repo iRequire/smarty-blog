@@ -36,6 +36,8 @@ class BlogHandler {
         $row = $stmt->fetch();
         $rowcount = $stmt->rowCount();
 
+        if($rowcount > 0){ $row['author_name'] = self::getFullNameByID($row['author']); }
+
         return (($rowcount > 0) ? $row : false);
     }
 
@@ -44,6 +46,7 @@ class BlogHandler {
         $statement = $this->pdo->prepare("SELECT * FROM blog_entries ORDER BY id DESC");
         $statement->execute();
         while($row = $statement->fetch()) {
+            $row['author_name'] = self::getFullNameByID($row['author']);
             $blog_entries[] = $row;
         }
 
@@ -55,6 +58,7 @@ class BlogHandler {
         $statement = $this->pdo->prepare("SELECT * FROM blog_comments WHERE `blogid` = ? ORDER BY id DESC");
         $statement->execute(array($blog_id));
         while($row = $statement->fetch()) {
+            $row['author_name'] = self::getFullNameByID($row['name']);
             $comments[] = $row;
         }
 
@@ -69,6 +73,7 @@ class BlogHandler {
         $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE title LIKE ?");
         $statement->execute(array('%'.$search_query.'%'));
         while($row = $statement->fetch()) {
+            $row['author_name'] = self::getFullNameByID($row['author']);
             $blog_entries[] = $row;
         }
         $count += $statement->rowCount();
@@ -76,6 +81,7 @@ class BlogHandler {
         $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE author LIKE ?");
         $statement->execute(array('%'.$search_query.'%'));
         while($row = $statement->fetch()) {
+            $row['author_name'] = self::getFullNameByID($row['author']);
             $blog_entries[] = $row;
         }
         $count += $statement->rowCount();
@@ -83,6 +89,7 @@ class BlogHandler {
         $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE text LIKE ?");
         $statement->execute(array('%'.$search_query.'%'));
         while($row = $statement->fetch()) {
+            $row['author_name'] = self::getFullNameByID($row['author']);
             $blog_entries[] = $row;
         }
         $count += $statement->rowCount();
@@ -100,9 +107,9 @@ class BlogHandler {
         return $row['enable_comments'];
     }
 
-    public function addComment($blog_id, $user, $text){
+    public function addComment($blog_id, $user_id, $text){
         $statement = $this->pdo->prepare("INSERT INTO blog_comments (blogid, name, text) VALUES (?, ?, ?)");
-        $statement->execute(array($blog_id, $user, $text));
+        $statement->execute(array($blog_id, $user_id, $text));
     }
 
     public function doesUserExist($username){
@@ -144,9 +151,22 @@ class BlogHandler {
         return $stmt->fetch();
     }
 
-    public function addBlog($title, $author, $text, $enable_comments){
+    public function getUsernameByID($id){
+        return self::getUserByID($id)['username'];
+    }
+
+    public function getUserIDByName($name){
+        return self::getUser($name)['id'];
+    }
+
+    public function getFullNameByID($id){
+        $usr = self::getUserByID($id);
+        return $usr['firstname'].' '.$usr['lastname'];
+    }
+
+    public function addBlog($title, $author_id, $text, $enable_comments){
         $statement = $this->pdo->prepare("INSERT INTO blog_entries (title, author, text, enable_comments) VALUES (?, ?, ?, ?)");
-        $statement->execute(array($title, $author, $text, $enable_comments));
+        $statement->execute(array($title, $author_id, $text, $enable_comments));
     }
 
     public function deleteBlog($id){
@@ -158,6 +178,7 @@ class BlogHandler {
         $ui = self::getUser($username);
         $user = array();
         $user['loggedin'] = true;
+        $user['id'] = $ui['id'];
         $user['username'] = $username;
         $user['admin'] = $ui['admin'];
         $user['firstname'] = $ui['firstname'];
@@ -197,7 +218,7 @@ class BlogHandler {
     function customErrorHandler($fehlercode, $fehlertext, $fehlerdatei, $fehlerzeile)
     {
         if (!(error_reporting() & $fehlercode)) {
-            return;
+            return false;
         }
 
         switch ($fehlercode) {

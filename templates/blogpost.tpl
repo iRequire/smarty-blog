@@ -3,9 +3,10 @@
 
 <div class="container pagebg">
     <div class="row">
+        <div class="col-lg-12">
+            {include file="include/breadcrumb.tpl" activePage="{$data.ui.TEXT_UI_BLOGPOSTS}"}
+        </div>
         <div class="col-lg-8 shadow">
-            {include file="include/breadcrumb.tpl" activePage="Blogpost: '{$data.blogpost.title}'"}
-
             <h1 class="mt-4">{$data.blogpost.title}</h1>
             <p class="lead">
                 <i class="fas fa-user"></i> <a href="?p=search&query={$data.blogpost.author_name}">{$data.blogpost.author_name}</a> ({$data.blogpost.date|date_format:"%d.%m.%Y %H:%M"})

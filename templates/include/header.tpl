@@ -36,7 +36,10 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href=".">Smarty</a>
+            <a class="navbar-brand" href=".">
+                <img src="templates/include/img/{$data.user.language|default:'en'}.png" height="30" class="d-inline-block align-top" alt="">
+                Smarty
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -48,7 +51,7 @@
                                 {$data.user.firstname} {$data.user.lastname} ({$data.user.username})
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">####</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="?p=logout"><i class="fas fa-sign-out-alt"></i> {$data.ui.TEXT_UI_LOGOUT}</a>
                             </div>

@@ -14,6 +14,7 @@ if(isset($_SESSION['username'])){
     $user = $bloghandler->getUserInfoArray($_SESSION['username']);
     if(!in_array($user['language'], $languages)){
         require_once 'configs/en.lang.php';
+        $bloghandler->editUser($user['id'], 'language', "en");
     }else{
         require_once 'configs/'.$user['language'].'.lang.php';
     }

@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>{$title|default:"Kein Titel"}</title>
+        <title>{$title|default:"No title"}</title>
 
         <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
 
@@ -42,18 +42,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Blog
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
                     {if $data.user.loggedin > 0}
-                        <li class="nav-item">
-                            <a class="nav-link" href="?p=logout">Angemeldet als {$data.user.firstname} {$data.user.lastname} ({$data.user.username})</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {$data.user.firstname} {$data.user.lastname} ({$data.user.username})
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="?p=logout"><i class="fas fa-sign-out-alt"></i> {$data.ui.TEXT_UI_LOGOUT}</a>
+                            </div>
                         </li>
                     {else}
                         <li class="nav-item">
-                            <a class="nav-link" href="?p=login">Anmelden</a>
+                            <a class="nav-link" href="?p=login"><i class="fas fa-sign-in-alt"></i> {$data.ui.TEXT_UI_LOGIN}</a>
                         </li>
                     {/if}
                     {if $data.user.admin}

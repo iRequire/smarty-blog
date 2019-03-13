@@ -1,5 +1,4 @@
 <?php session_start();
-require_once 'configs/de.lang.php';
 require_once 'handler.php';
 $bloghandler = new BlogHandler();
 
@@ -12,6 +11,9 @@ $file = 'blogpostlist.tpl';
 $user = array('loggedin' => false, 'admin' => 0, 'isAuthor' => 0);
 if(isset($_SESSION['username'])){
     $user = $bloghandler->getUserInfoArray($_SESSION['username']);
+    require_once 'configs/'.$user['language'].'.lang.php';
+}else{
+    require_once 'configs/en.lang.php';
 }
 
 
@@ -109,6 +111,12 @@ if($_POST){
                     $bloghandler->deleteComment($commentID);
                     $notifications[] = array('type' => 'success', 'text' => TEXT_NOTIFICATION_COMMENT_DELETED);
                     break;
+
+                case 'toggleBlogComments':
+                    $blogid = $_POST['admin__blogID'];
+                    $bloghandler->toggleBlogComments($blogid);
+                    $notifications[] = array('type' => 'success', 'text' => TEXT_NOTIFICATION_COMMENTS_TOGGLED);
+                    break;
             }
         }else{
             $notifications[] = array('type' => 'danger', 'text' => TEXT_NOTIFICATION_NO_PERMISSIONS);
@@ -128,7 +136,7 @@ if($_POST){
             }
         }
         if($ok) {
-            $bloghandler->addBlog($_POST['blog_title'], $user['firstname'] . ' ' . $user['lastname'], base64_decode($_POST['blog_text']), 1);
+            $bloghandler->addBlog($_POST['blog_title'], $user['id'], base64_decode($_POST['blog_text']), 1);
             $notifications[] = array('type' => 'success', 'text' => TEXT_NOTIFICATION_BLOGPOST_PUBLISHED);
         }
     }
@@ -144,7 +152,7 @@ if($_POST){
             }
         }
         if($ok) {
-            $bloghandler->addComment($_POST['comment_blogid'], $user['firstname'] . ' ' . $user['lastname'], $_POST['comment_text']);
+            $bloghandler->addComment($_POST['comment_blogid'], $user['id'], $_POST['comment_text']);
             $notifications[] = array('type' => 'success', 'text' => TEXT_NOTIFICATION_COMMENT_PUBLISHED);
         }
     }
@@ -165,6 +173,14 @@ if(isset($_SESSION['username'])){
 
 $page = ((isset($_GET['p'])) ? $_GET['p'] : '');
 switch($page){
+    case 'changeLanguage':
+        if($user['loggedin']) {
+            $newlang = ((isset($_GET['newLanguage'])) ? $_GET['newLanguage'] : 'en');
+            $bloghandler->editUser($user['id'], 'language', $newlang);
+            Header('Location: .');
+            die();
+        }
+        break;
     case 'blog':
         $id = ((isset($_GET['id'])) ? $_GET['id'] : 0);
         $blogpost = $bloghandler->getBlogPost($id);
@@ -225,7 +241,11 @@ switch($page){
         break;
 }
 
-
+foreach(get_defined_constants(true)['user'] as $key=>$value){
+    if(strpos($key, "TEXT_UI_") !== FALSE){
+        $data['ui'][$key] = $value;
+    }
+}
 
 if($file == 'blogpostlist.tpl'){
     $data['blog_entries'] = $bloghandler->getBlogEntries();
@@ -234,3 +254,4 @@ $data['user'] = $user;
 $data['notifications'] = $notifications;
 
 $bloghandler->loadPage($file, $data);
+

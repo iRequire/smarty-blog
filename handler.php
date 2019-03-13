@@ -79,7 +79,7 @@ class BlogHandler {
         $count += $statement->rowCount();
 
         $statement = $this->pdo->prepare("SELECT * FROM blog_entries WHERE author LIKE ?");
-        $statement->execute(array('%'.$search_query.'%'));
+        $statement->execute(array('%'.self::getUserIDByName($search_query).'%'));
         while($row = $statement->fetch()) {
             $row['author_name'] = self::getFullNameByID($row['author']);
             $blog_entries[] = $row;
